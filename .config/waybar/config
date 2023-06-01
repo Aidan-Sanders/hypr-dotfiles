@@ -1,0 +1,117 @@
+{
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passtrough": false,
+  "gtk-layer-shell": true,
+  "height": 0,
+  "modules-left": [
+    "custom/powermenu",
+    "hyprland/mode",
+    "wlr/workspaces",
+    "cpu",
+    "memory"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "pulseaudio", 
+    "temperature", 
+    "backlight", 
+    "network", 
+    "clock", 
+    "tray",
+    "mpd",
+    "custom/changebg"
+  ],
+  "hyprland/window": {
+    "format": "{}"
+  },
+  "wlr/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "all-outputs": true,
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "urgent": "",
+      "active": "",
+      "default": ""
+    }
+  },
+  "custom/powermenu": {
+    "format": "",
+    "interval": "once",
+    "on-click": "wlogout --protocol layer-shell",
+    "tooltip": false,
+    "signal": 8
+  },
+  "temperature": {
+    "format": "{temperatureC}°C "
+  },
+  "clock": {
+    "interval": 1,
+    "tooltip": true,
+    "today-format": "<span color='#ff6699'><b><u>{}</u></b></span>",
+    "calendar-weeks-pos": "right",
+    "format-calendar": "<span color='#ecc6d9'><b>{}</b></span>",
+    "format-calendar-weeks": "<span color='#99ffdd'><b>W{:%V}</b></span>",
+    "format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>"
+  },
+  "custom/changebg": {
+    "format": "",
+    "on-click": "~/.config/waybar/scripts/changebg.sh ~/.config/backgrounds"
+  },
+  "cpu": {
+    "interval": 2,
+    "format": "{}% ",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 2,
+    "format": "{}% ",
+    "max-length": 10
+  },
+  "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pavucontrol -i 5",
+        "on-scroll-down": "pavucontrol -d 5",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+    "hyprland/mode": {
+        "tooltip": false,
+        "format": " {}",
+        "max-length": 50
+    },
+    "network": {
+        "interface": "wlan0",
+        "format": "{ifname}",
+        "format-wifi": "  {essid} ({signalStrength}%)",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    }
+}
