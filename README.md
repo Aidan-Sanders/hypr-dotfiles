@@ -13,7 +13,7 @@ swaylock-effects, wlogout
 swww
 mako
 
-alacritty, zsh
+alacritty
 neovim, nvchad
 google-chrome
 btop
