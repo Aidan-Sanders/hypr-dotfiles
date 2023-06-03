@@ -25,3 +25,4 @@ if [[ ${#images[@]} -gt 0 ]]; then
 else
   echo "No valid images found in the directory: $1"
 fi
+

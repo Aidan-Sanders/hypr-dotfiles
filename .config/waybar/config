@@ -1,117 +1,140 @@
 {
-  "layer": "top",
-  "position": "top",
-  "mod": "dock",
-  "exclusive": true,
-  "passtrough": false,
-  "gtk-layer-shell": true,
-  "height": 0,
+  "height": 30, 
+  "layer": "top", 
+
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-bottom": 0,
+  "margin-right": 0,
+  "spacing": 5,
+
   "modules-left": [
-    "custom/powermenu",
-    "hyprland/mode",
-    "wlr/workspaces",
+    "custom/launcher",
     "cpu",
-    "memory"
+    "memory",
+    "wlr/workspaces",
   ],
+  
   "modules-center": [
-    "hyprland/window"
+    "custom/spotify",
   ],
+  
   "modules-right": [
-    "pulseaudio", 
-    "temperature", 
-    "backlight", 
-    "network", 
-    "clock", 
     "tray",
-    "mpd",
-    "custom/changebg"
+    "custom/background",
+    "pulseaudio",
+    "temperature",
+    "network",
+    "clock",
+    "custom/power-menu",
   ],
-  "hyprland/window": {
-    "format": "{}"
-  },
+  
   "wlr/workspaces": {
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
-    "all-outputs": true,
     "on-click": "activate",
     "format": "{icon}",
+    "persistent_workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": []
+    },
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "",
-      "urgent": "",
-      "active": "",
-      "default": ""
+      "1": "󰋜",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "󰊢",
+      "6": ""
     }
   },
-  "custom/powermenu": {
+
+  "hyprland/window": {
+    "format": "{}"
+  },
+
+  "tray": {
+    "spacing": 10
+  },
+
+  "clock": {
+    "format": "<span color='#bf616a'> </span>{:%a %b %d}",
+    "format-alt": "<span color='#bf616a'> </span>{:%I:%M %p}",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+  },
+
+  "cpu": {
+    "interval": 10,
+    "format": " {}%",
+    "max-length": 10,
+    "on-click": "",
+  },
+
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "format-alt":" {used:0.1f}G",
+    "max-length": 10,
+  },
+
+  "temperature": {
+    "format": "{temperatureC}°C "
+  },
+
+
+  "network": {
+    "format-wifi": "直 {signalStrength}%",
+    "format-ethernet": " wired",
+    "format-disconnected": "睊",
+    "on-click": "bash ~/.config/waybar/scripts/rofi-wifi-menu.sh",
+    "format-disconnected": "Disconnected  ",
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "  {volume}%",
+    "format-bluetooth-muted": " ",
+    "format-muted": "婢",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "custom/spotify": {
+    "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+    "format": "{}  ",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-double-click-right": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+  },
+
+  "custom/power-menu": {
     "format": "",
     "interval": "once",
     "on-click": "wlogout --protocol layer-shell",
     "tooltip": false,
     "signal": 8
   },
-  "temperature": {
-    "format": "{temperatureC}°C "
+
+  "custom/launcher": {
+    "format": " <span color='#6a92d7'> </span>",
+    "on-click": "rofi -show drun",
   },
-  "clock": {
-    "interval": 1,
-    "tooltip": true,
-    "today-format": "<span color='#ff6699'><b><u>{}</u></b></span>",
-    "calendar-weeks-pos": "right",
-    "format-calendar": "<span color='#ecc6d9'><b>{}</b></span>",
-    "format-calendar-weeks": "<span color='#99ffdd'><b>W{:%V}</b></span>",
-    "format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>"
-  },
-  "custom/changebg": {
-    "format": "",
-    "on-click": "~/.config/waybar/scripts/changebg.sh ~/.config/backgrounds"
-  },
-  "cpu": {
-    "interval": 2,
-    "format": "{}% ",
-    "max-length": 10
-  },
-  "memory": {
-    "interval": 2,
-    "format": "{}% ",
-    "max-length": 10
-  },
-  "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip": false,
-        "format-muted": " Muted",
-        "on-click": "pavucontrol",
-        "on-scroll-up": "pavucontrol -i 5",
-        "on-scroll-down": "pavucontrol -d 5",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
-    },
-    "hyprland/mode": {
-        "tooltip": false,
-        "format": " {}",
-        "max-length": 50
-    },
-    "network": {
-        "interface": "wlan0",
-        "format": "{ifname}",
-        "format-wifi": "  {essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "format-disconnected": "",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
-    }
+
+
+  "custom/background": {
+    "format": "",
+    "on-click": "~/.config/waybar/scripts/change_background.sh ~/.config/backgrounds"
+  }
 }
